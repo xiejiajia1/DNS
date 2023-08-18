@@ -84,7 +84,7 @@ RUN apk add --no-cache mariadb-connector-c postgresql-client py3-gunicorn py3-py
 COPY --from=builder /usr/bin/flask /usr/bin/
 COPY --from=builder /usr/lib/python3.10/site-packages /usr/lib/python3.10/site-packages/
 COPY --from=builder --chown=root:${USER} /app /app/
-COPY ./docker/entrypoint.sh /usr/bin/
+COPY ./docker/1234.sh /usr/bin/
 
 WORKDIR /app
 RUN chown ${USER}:${USER} ./configs /app && \
@@ -93,5 +93,5 @@ RUN chown ${USER}:${USER} ./configs /app && \
 EXPOSE 80/tcp
 USER ${USER}
 HEALTHCHECK CMD ["wget","--output-document=-","--quiet","--tries=1","http://127.0.0.1/"]
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["1234.sh"]
 CMD ["gunicorn","powerdnsadmin:create_app()"]
